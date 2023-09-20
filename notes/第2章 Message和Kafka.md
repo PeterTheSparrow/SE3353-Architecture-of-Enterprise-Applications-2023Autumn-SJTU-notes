@@ -26,7 +26,7 @@ Kafka的作用有：
 - 异步处理
 - 流量削峰
 
-![](./res/../kafka.jpg)
+![](./res/kafka.jpg)
 
 然后来看一些关于kafka的基本概念：
 1. broker：kafka集群包含一个或多个服务器，这种服务器被称为broker
@@ -62,3 +62,6 @@ Kafka的作用有：
 
 
 ### 3.3.3 集群的容灾
+
+## 3.4 Kafka的使用
+
