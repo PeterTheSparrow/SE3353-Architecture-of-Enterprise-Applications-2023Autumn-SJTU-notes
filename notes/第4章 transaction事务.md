@@ -1,5 +1,8 @@
 # 第4章 Transaction Management 事务管理
 
+> So what was true then is true now. Don’t waste your time living someone else’s life. Don’t try to emulate the people who came before you to the exclusion of everything else, contorting into a shape that doesn’t fit.
+> It takes too much mental effort – effort that should be dedicated to creating and building. You’ll waste precious time trying to rewire your every thought, and, in the mean time, you won’t be fooling anybody.
+
 2023.09.16
 
 - What is a transaction? 事务的概念
