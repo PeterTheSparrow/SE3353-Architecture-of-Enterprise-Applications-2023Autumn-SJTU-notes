@@ -131,6 +131,8 @@ cdm@DESKTOP-FK33F9A:/$ sudo service redis-server status
  * redis-server is not running
 ```
 
+当然，如果你在redis-server的窗口中，直接ctrl+c也可以停止redis服务。
+
 ## 2. redis-client的一些基本概念
 
 对redis-cli有个基本概念。
