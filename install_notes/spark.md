@@ -20,3 +20,7 @@ Any way the wind blows doesn't really matter to me, to me
 然后就顺利跑起来了。
 
 ![](./res/spark.png)
+
+## 如何运行程序？
+
+1. 通过脚本，把任务提交到集群上运行
