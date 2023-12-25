@@ -1,4 +1,4 @@
-# 3 GraphQL
+# 第23讲 GraphQL
 
 2023.12.01
 

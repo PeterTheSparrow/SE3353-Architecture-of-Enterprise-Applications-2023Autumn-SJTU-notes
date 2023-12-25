@@ -1,4 +1,4 @@
-# 9 HBase (Google Big Table)
+# 第29讲 HBase (Google Big Table)
 
 > 仍然能拥有梦想跟前途
 仍然能拥有自尊跟自豪
