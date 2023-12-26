@@ -33,7 +33,7 @@
 | | Data Lake | Data Warehouse |
 | --- | --- | --- |
 | Data Structure| Raw | Processed |
-| Propose of Data | Not yet defined | Currently in use |
+| Purpose of Data | Not yet defined | Currently in use |
 | Users | Data Scientists：针对原始数据进行处理 | Business Professionals：主要针对商业金融的分析、统计 |
 | Accessibility | Highly accessible and quick to update：因为不需要去做etl这样的动作 | More complicated and costly to make changes：可以理解为主要是数据的一次导入，以后只是做分析的 |
 
