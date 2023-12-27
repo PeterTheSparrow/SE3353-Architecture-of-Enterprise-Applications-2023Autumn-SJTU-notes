@@ -59,7 +59,3 @@
 2. 消息代理（Message Broker）
 
 在WebSocket通信中，**消息代理** 是指WebSocket服务器和客户端之间的中间件，用于转发WebSocket消息。它充当了WebSocket服务器和客户端之间的桥梁，使它们可以相互通信。消息代理可以是一个独立的服务器，也可以是WebSocket服务器本身。
-
-
-### 3.2.2 Using WebSocket in Spring Application
-
