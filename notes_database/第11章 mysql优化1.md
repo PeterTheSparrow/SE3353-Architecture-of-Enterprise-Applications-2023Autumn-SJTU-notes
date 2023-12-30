@@ -20,7 +20,7 @@
 
 - 表结构是否合理，范式化？数据类型？
 - 拆表？对于一张表中的数据，我们更希望是整张表中的数据全部被访问或者全部不被访问；若不然，就需要考虑拆表。
-- varchar（可变长，便于压缩）和char还有text（存储一个指针，执行外部存储的原文）
+- varchar（可变长，便于压缩）和char还有text（存储一个指针，执行外部存储的原文）；char(N)占用的字节得看字符集，占用的是字符集中最长的字节数；
 - 读取记录的时候，考虑到page的大小有限，如果一条记录的大小就占用了好几个page显然是不合理的，所以特别长的文本需要使用text类型，这样读取出来的text部分就是一个指针，性能更好。
 - 什么样的索引科学？
 - 什么样的存储引擎好？（注：MySQL其实分为两部分：Server层和存储引擎层，Server层的作用是跟客户端交互，解析SQL，进行查询优化，存储引擎层负责数据的存储和提取）
@@ -56,6 +56,13 @@
 - 系统会自动在自增的主键建立索引（是聚簇索引，也即索引在叶子节点的指针指向的位置在磁盘上是连续的），这样最大的好处就是在join操作的时候，可以快速定位到目标。
 - 当表格比较小的时候，建立索引很浪费，不如全表扫描。
 - 获取要find all的时候，索引也很浪费，本来就是要把整个表数据读取出来，索引失去意义。
+
+
+选择自增主键做索引的好处：
+- 如果表内的某几列都很重要，但是拿不准哪几列做索引的时候，不妨直接使用自增主键
+- 自增主键的唯一性由数据库保证，更加可靠
+- 同时这个主键作为外键也比较方便
+- 因为索引是要把这列复制出来的，因此结构简单的话，生成的索引比较小，同时生成的B+树的效率也比较高
 
 ## 3. 聚簇索引
 
@@ -140,11 +147,40 @@ blob：big large object。
 ## 12. innodb_page_size
 
 数据库默认按照行存储的，如果存满了一个1 page就把这一页load到内存里面
-行的尺寸根页的大小相关，每行的数据的大小应该是innodb_page_size的一半而且必须要小一点，因为有一些元数据在里面，需要占用空间
+行的尺寸和页的大小相关，每行的数据的大小应该是innodb_page_size的一半而且必须要小一点，因为有一些元数据在里面，需要占用空间
 这就是mysql存储行的最大上限
 
+**规则：一行里面最多放置65535个字节**
+![](./res/65535.png)
+
+![](./res/65535-2.png)
+
+那么上图中，第二个插入为什么失败了？
+因为一行的大小确实是65535上限，但是我们存储的是varchar，所以还需要存储一个长度，这个长度是2个字节，所以实际上是65533（因为65535十六进制是ffff，所以只能存储65533个字节），所以第三个插入时是成功的。
+
+> In contrast to CHAR,VARCHAR values are stored as a 1-byte or 2-byte length prefix plus data. The length prefix indicates the number of bytes in the value column uses one length byte if values require no more than 255 bytes, two length bytes if values may require more than 255 bytes. ——来自mysql官方
+
+![](./res/255.png)
+
+
+但是插入下面的表是成功的：
+
 ```sql
-CREATE INDEX idx_book_title_author ON BOOK (TITLE, AUTHOR);
-CREATE INDEX idx_book_type_price ON BOOK (TYPE, PRICE);
-CREATE INDEX idx_book_stock_price ON BOOK (PRICE, STOCK);
+CREATE TABLE t (
+    c1 VARCHAR(65530))
+    ROW_FORMAT=DYNAMIC DEFAULT CHARSET=lantin1;
 ```
+
+如何理解60000+的成功了，8000+的失败？
+
+我们在做的时候，innodb的page size是16kb，那么这一行的大小就是比一半稍微小一点，就是8192，这里它告诉我们说不能大于8126；那存varchar的时候，它是这样存的：存前缀，剩下的部分存到其他地方去了。当然如果存的下，就不用一个指针指到外面去了，直接存表里面完事。
+
+所以这也就引出了一个新的问题：**varchar和char各自是如何在表里面存储的**？
+
+首先：CHAR最多到255，VARCHAR可以更大。
+然后我们来看结构：
+
+![](./res/structure.png)
+
+- char：开始一个头header，后面一行一行因为每一行长度是定长的（char是，其他定长的数据类型也是），所以能推算出来长度，直接挨个放
+- varchar：这个比较tricky，header从头往后写，varchar从后往前加，直到两个遇上为止
