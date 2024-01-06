@@ -9,6 +9,7 @@
    - notes：第一部分 服务器端应用程序开发
    - notes_database： 第二部分 数据库
    - notes_operation_and_maintenance：第三部分 运维
+   - release.pdf：最终版本的pdf，可以直接下载拿去考试
 2. 本笔记在编写的时候，第一部分后端相关内容和第二部分数据库相关内容不少是在[2022-2023-1-Application-System-Architecture](https://github.com/Musicminion/2022-2023-1-Application-System-Architecture)的基础上进行编写的，征得原作者同意。在此向其致以诚挚的谢意！
 3. 水平有限，难免错漏，欢迎指正
 4. 仅供学习使用；如果您认为存在侵权，请联系我
