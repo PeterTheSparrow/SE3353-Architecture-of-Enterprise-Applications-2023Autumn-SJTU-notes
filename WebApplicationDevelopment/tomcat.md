@@ -1,6 +1,6 @@
 # Tomcat
 
-@credite: www.itheima.com
+@credits: www.itheima.com
 
 ## 1. 简介
 
