@@ -10,7 +10,7 @@
    - **notes_database**： 第二部分 数据库
    - **notes_operation_and_maintenance**：第三部分 运维
    - release.pdf：最终版本的pdf，可以直接下载拿去考试
-   - WebApplicationDevelopment：互联网应用开发技术的相关笔记（本课程的前置课程，考试无关，仅放置于此）
+   - WebApplicationDevelopment：互联网应用开发技术的相关笔记（本课程的前置课程，考试无关，包含一定私货，仅放置于此）
 2. 本笔记在编写的时候，第一部分后端相关内容和第二部分数据库相关内容不少是在[2022-2023-1-Application-System-Architecture](https://github.com/Musicminion/2022-2023-1-Application-System-Architecture)的基础上进行编写的，征得原作者同意。在此向其致以诚挚的谢意！
 3. 作者水平有限，并且很多内容也是上课仓促记录或者是飞书转文字，因此难免差错；如果存在知识点的错误，欢迎指正
 4. **任何转载请引用本仓库**！**严禁用于商业用途**！
